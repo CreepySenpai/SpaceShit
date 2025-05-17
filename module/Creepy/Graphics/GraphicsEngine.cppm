@@ -8,7 +8,7 @@ export module creepy.graphics.graphicsengine;
 
 export import creepy.core.resourcedesc;
 
-import creepy.graphics.rendersystem;
+import creepy.graphics.graphicsdevice;
 
 namespace Creepy{
     
@@ -17,7 +17,7 @@ namespace Creepy{
             void* createSwapChain(const SwapChainDesc& swapChainDesc) const;
 
         private:
-            RenderSystem m_renderSystem;
+            GraphicsDevice m_graphicsDevice;
     };
 
 }

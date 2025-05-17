@@ -6,10 +6,10 @@ module;
 
 module creepy.graphics.graphicsengine;
 
-import creepy.graphics.rendersystem;
+import creepy.graphics.graphicsdevice;
 
 namespace Creepy{
     void* GraphicsEngine::createSwapChain(const SwapChainDesc& swapChainDesc) const {
-        return m_renderSystem.createSwapChain(swapChainDesc);
+        return m_graphicsDevice.createSwapChain(swapChainDesc);
     }
 }
