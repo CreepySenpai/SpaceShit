@@ -1,17 +1,16 @@
 module;
 
 #ifdef CREEPY_INTELLISENSE
-    #include <Creepy/Window/Window.cppm>
-    #include <Creepy/Core/Logger.cppm>
+    #include <Creepy/Dump.hpp>
 #endif
 
-#include <cstdint>
-#include <print>
+#include <bits/c++config.h>
 #include <windows.h>
 
 module creepy.window.window;
 
 import creepy.core.logger;
+import creepy.graphics.swapchain;
 
 
 namespace {
@@ -58,6 +57,24 @@ namespace Creepy{
     }
 
     Window::compl Window() {
+        delete static_cast<SwapChain*>(m_swapChain);
+        m_swapChain = nullptr;
         DestroyWindow(static_cast<HWND>(m_windowHandle));
+    }
+
+    uint32_t Window::getWidth() const {
+        return m_width;
+    }
+
+    uint32_t Window::getHeight() const {
+        return m_height;
+    }
+
+    void* Window::getWindowHandle() const {
+        return m_windowHandle;
+    }
+
+    void Window::setSwapChain(void* swapChain) {
+        m_swapChain = swapChain;
     }
 }

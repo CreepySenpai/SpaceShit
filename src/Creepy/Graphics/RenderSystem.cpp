@@ -1,11 +1,10 @@
 module;
 
 #ifdef CREEPY_INTELLISENSE
-    #include <Creepy/Graphics/RenderSystem.cppm>
-    #include <Creepy/Core/Logger.cppm>
+    #include <Creepy/Dump.hpp>
 #endif
 
-#include <print>
+#include <bits/c++config.h>
 #include <d3d11.h>
 #include <wrl.h>
 
@@ -27,8 +26,30 @@ namespace Creepy{
 
         if(FAILED(res)){
             Log::Error("Failed to create logical device");
+            // std::println("Failed to create logical device");
+        }
+        
+        res = m_logicalDevice->QueryInterface(IID_PPV_ARGS(&m_dxgiDevice));
+
+        if(FAILED(res)){
+            Log::Error("Failed to QueryInterface");
+        }
+
+        res = m_dxgiDevice->GetParent(IID_PPV_ARGS(&m_dxgiAdapter));
+
+        if(FAILED(res)){
+            Log::Error("Failed to m_dxgiDevice GetParent");
+        }
+
+        res = m_dxgiAdapter->GetParent(IID_PPV_ARGS(&m_dxgiFactory));
+
+        if(FAILED(res)){
+            Log::Error("Failed to m_dxgiAdapter GetParent");
         }
     }
 
     
+    SwapChain* RenderSystem::createSwapChain(const SwapChainDesc& swapChainDesc) const {
+        return new SwapChain{m_logicalDevice.Get(), m_dxgiFactory.Get(), swapChainDesc};
+    }
 }

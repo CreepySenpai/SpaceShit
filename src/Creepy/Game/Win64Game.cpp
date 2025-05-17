@@ -1,7 +1,7 @@
 module;
 
 #ifdef CREEPY_INTELLISENSE
-    #include <Creepy/Game/Game.cppm>
+    #include <Creepy/Dump.hpp>
 #endif
 
 #include <windows.h>

@@ -1,11 +1,14 @@
 module;
 
-#include <print>
+#ifdef CREEPY_INTELLISENSE
+    #include <Creepy/Dump.hpp>
+#endif
 
 export module creepy.core.logger;
 
-// TODO: We need to include <print> everywhere use this Logger
-// Need import std; to fix this problem
+import std;
+
+export import creepy.core.type;
 
 export namespace Creepy::Log {
 

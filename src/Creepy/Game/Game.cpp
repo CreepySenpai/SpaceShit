@@ -1,13 +1,8 @@
 module;
 
 #ifdef CREEPY_INTELLISENSE
-    #include <Creepy/Game/Game.cppm>
-    #include <Creepy/Graphics/GraphicsEngine.cppm>
-    #include <Creepy/Window/Window.cppm>
-    #include <Creepy/Core/Logger.cppm>
+    #include <Creepy/Dump.hpp>
 #endif
-
-#include <print>
 
 module creepy.game.game;
 
@@ -17,6 +12,14 @@ namespace Creepy{
 
     Game::Game() : m_graphicsEngine{}, m_window{1280, 720}{
         Log::Info("Game init ok: {}", 10);
+
+        const SwapChainDesc swapChainDesc{
+            .width = 1280,
+            .height = 720,
+            .windowHandle = m_window.getWindowHandle()
+        };
+
+        m_window.setSwapChain(m_graphicsEngine.createSwapChain(swapChainDesc));
     }
 
 }

@@ -1,8 +1,7 @@
 module;
 
 #ifdef CREEPY_INTELLISENSE
-    #include <Creepy/Graphics/GraphicsEngine.cppm>
-    #include <Creepy/Window/Window.cppm>
+    #include <Creepy/Dump.hpp>
 #endif
 
 export module creepy.game.game;
