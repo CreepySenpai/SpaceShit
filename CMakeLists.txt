@@ -30,7 +30,7 @@ target_include_directories(SpaceShitLib PUBLIC ${CMAKE_SOURCE_DIR}/module)
 
 target_link_directories(SpaceShitLib PUBLIC ${CMAKE_SOURCE_DIR}/lib)
 
-target_link_libraries(SpaceShitLib PUBLIC stdc++exp d3d11)
+target_link_libraries(SpaceShitLib PUBLIC stdc++exp d3d11 d3dcompiler)
 
 add_compile_definitions(SpaceShitLib PUBLIC -DNOMINMAX -DWIN32_LEAN_AND_MEAN)
 
