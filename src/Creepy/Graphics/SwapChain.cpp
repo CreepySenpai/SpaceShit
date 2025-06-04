@@ -14,7 +14,8 @@ import creepy.core.logger;
 
 namespace Creepy{
 
-    SwapChain::SwapChain(ID3D11Device* logicalDevice, IDXGIFactory* factory, const SwapChainDesc& swapChainDesc) : m_logicalDevice{logicalDevice}, m_factory{factory} {
+    SwapChain::SwapChain(ID3D11Device* logicalDevice, IDXGIFactory* factory, const SwapChainDesc& swapChainDesc) : m_logicalDevice{logicalDevice}, m_factory{factory},
+        m_width{static_cast<float>(swapChainDesc.width)}, m_height{static_cast<float>(swapChainDesc.height)}{
         
         DXGI_SWAP_CHAIN_DESC swapChainCreateInfo{};
         swapChainCreateInfo.BufferDesc.Width = swapChainDesc.width;
@@ -33,6 +34,44 @@ namespace Creepy{
             Log::Error("Failed to create window handle");
         }
 
+        // Create render target
+        reloadBuffers();
+    }
+
+    void SwapChain::reloadBuffers() {
+        Microsoft::WRL::ComPtr<ID3D11Texture2D> buffer{nullptr};
+
+        auto res = m_swapChain->GetBuffer(0, IID_PPV_ARGS(&buffer));
+
+        if(FAILED(res)){
+            Log::Error("Failed to GetBuffer");
+        }
+
+        res = m_logicalDevice->CreateRenderTargetView(buffer.Get(), nullptr, &m_renderTargetView);
+    
+        if(FAILED(res)){
+            Log::Error("Failed to CreateRenderTargetView");
+        }
+    }
+
+    ID3D11RenderTargetView* SwapChain::getrenderTargetView() const {
+        return m_renderTargetView.Get();
+    }
+
+    void SwapChain::present(bool isEnableVsync) {
+        auto res = m_swapChain->Present(isEnableVsync, 0);
+
+        if(FAILED(res)){
+            Log::Error("Failed to Present");
+        }
+    }
+
+    float SwapChain::getWidth() const {
+        return m_width;
+    }
+
+    float SwapChain::getHeight() const {
+        return m_height;
     }
 
 }

@@ -8,6 +8,8 @@ export module creepy.window.window;
 
 export import creepy.core.type;
 
+import creepy.graphics.swapchain;
+
 namespace Creepy{
 
     export class Window{
@@ -19,13 +21,15 @@ namespace Creepy{
             uint32_t getWidth() const;
             uint32_t getHeight() const;
             void* getWindowHandle() const;
-            void setSwapChain(void* swapChain);
-            
+
+            void setSwapChain(SwapChain* swapChain);
+            SwapChain* getSwapChain() const;
+
         private:
             uint32_t m_width;
             uint32_t m_height;
             void* m_windowHandle{nullptr};
-            void* m_swapChain{nullptr};
+            SwapChain* m_swapChain{nullptr};
     };
 
 }

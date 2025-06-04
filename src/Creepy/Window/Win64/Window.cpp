@@ -74,7 +74,11 @@ namespace Creepy{
         return m_windowHandle;
     }
 
-    void Window::setSwapChain(void* swapChain) {
+    void Window::setSwapChain(SwapChain* swapChain) {
         m_swapChain = swapChain;
+    }
+
+    SwapChain* Window::getSwapChain() const {
+        return m_swapChain;
     }
 }

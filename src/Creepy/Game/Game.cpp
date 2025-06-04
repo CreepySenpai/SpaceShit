@@ -6,6 +6,8 @@ module;
 
 module creepy.game.game;
 
+import creepy.graphics.swapchain;
+
 import creepy.core.logger;
 
 namespace Creepy{
@@ -20,6 +22,11 @@ namespace Creepy{
         };
 
         m_window.setSwapChain(m_graphicsEngine.createSwapChain(swapChainDesc));
+    }
+
+    void Game::update() {
+        const auto swapChain = m_window.getSwapChain();
+        m_graphicsEngine.render(*swapChain);
     }
 
 }
