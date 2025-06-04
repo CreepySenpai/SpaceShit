@@ -4,6 +4,7 @@ module;
     #include <Creepy/Dump.hpp>
 #endif
 
+#include <bits/c++config.h>
 #include <windows.h>
 
 module creepy.game.game;
@@ -25,7 +26,8 @@ namespace Creepy{
                 DispatchMessageA(&message);
             }
 
-            Sleep(1);
+            
+            update();
         }
     }
 
