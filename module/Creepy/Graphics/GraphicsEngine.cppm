@@ -14,10 +14,18 @@ namespace Creepy{
     
     export class GraphicsEngine{
         public:
-            void* createSwapChain(const SwapChainDesc& swapChainDesc) const;
+            GraphicsEngine();
+            ~GraphicsEngine();
 
+            SwapChain* createSwapChain(const SwapChainDesc& swapChainDesc) const;
+
+            void render(SwapChain& swapChain);
+            
         private:
             GraphicsDevice m_graphicsDevice;
+            DeviceContext* m_deviceContext{nullptr};
+            GraphicsPipelineState* m_graphicsPipelineState{nullptr};
+            VertexBuffer* m_vertexBuffer{nullptr};
     };
 
 }
